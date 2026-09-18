@@ -1,6 +1,6 @@
-# 🏦 Digital Bank
-
-A simple command-line banking system built with **Java**. This project was created as a college project to practice Object-Oriented Programming and understand how different types of bank accounts can have different rules while sharing common functionality.
+# 🏦 BankSphere
+### A Java-Based Banking Management System
+BankSphere is a simple command-line banking system built with **Java**. This project was created as a college project to practice Object-Oriented Programming and understand how different types of bank accounts can have different rules while sharing common functionality.
 
 The system supports **Savings, Checking, and Loan accounts** along with basic banking operations, account restrictions, validation, and local CSV data storage.
 
