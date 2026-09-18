@@ -62,7 +62,7 @@ The project mainly focuses on:
       Savings     Checking     Loan
       Account     Account     Account
 📂 Project Structure
-digital-bank/
+BankSphere/
 │
 ├── src/
 │   └── bank/
@@ -104,7 +104,7 @@ statement.md – Contains the problem statement, scope, target users, and projec
 The application provides a simple menu:
 
 ================================
-           DIGITAL BANK
+           BANKSPHERE
 ================================
 1. Create Account
 2. Deposit Money
@@ -131,16 +131,43 @@ A custom BankException is used to handle banking-related errors cleanly.
 
 💾 Data Storage
 
-Account information is stored locally using CSV files.
+The project uses CSV files for simple local data storage instead of a database.
+
+The main application uses:
 
 data/bank-data.csv
+
+The demo uses:
+
 data/demo-bank.csv
 
-The stored information includes:
+The CSV structure is:
 
 accountNumber,type,holderName,balance,locked
 
-This allows account data to be saved and loaded when the application starts.
+Example:
+
+SAV1001,SAVINGS,Aman,10000.00,false
+CHK1002,CHECKING,Riya,6000.00,false
+LON1003,LOAN,Kabir,20000.00,false
+
+When the application starts, it checks whether saved data exists and loads the available account records.
+
+🔢 Account Number Format
+
+The application generates account numbers automatically.
+
+The account number uses a prefix based on the account type:
+
+SAV → Savings Account
+CHK → Checking Account
+LON → Loan Account
+
+For example:
+
+SAV1001
+CHK1002
+LON1003
 
 🧪 Testing
 
@@ -153,6 +180,34 @@ Locked account operations
 Run the tests using:
 
 ./test.sh
+🎮 Demo Mode
+
+A demo mode is included to quickly see the application working.
+
+./run.sh demo
+
+It creates sample Savings, Checking, and Loan accounts, performs a transfer and loan repayment, and applies a monthly update.
+
+🚀 How to Run
+
+Make the scripts executable if required:
+
+chmod +x run.sh test.sh
+
+Run the application:
+
+./run.sh
+
+Run the tests:
+
+./test.sh
+
+Run demo mode:
+
+./run.sh demo
+
+The scripts compile the Java files into the out/ directories before running the application or tests.
+
 🎯 Project Scope
 
 This project is mainly intended for students learning:
@@ -173,16 +228,7 @@ It is an educational project and is not intended to be a real banking applicatio
 
 Through this project, I got practical experience with designing Java classes, connecting them through inheritance, handling different behaviours using polymorphism, working with collections and files, creating custom exceptions, and writing simple shell scripts and validation tests.
 
-🔮 Future Improvements
+## 📚 Project Documentation
 
-Some possible improvements are:
+This section contains the complete documentation of the BankSphere project, including the problem statement, project scope, objectives, target users, features, system design, account types, OOP concepts, testing, data storage, limitations, and future improvements.
 
-Add a GUI
-Add user authentication
-Add transaction history
-Add a database
-Add JUnit tests
-Improve input validation
-Use BigDecimal for financial calculations
-Add more account types
-Add transaction receipts
