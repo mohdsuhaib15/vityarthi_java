@@ -1,169 +1,188 @@
-# Digital Bank
+# 🏦 Digital Bank
 
-A small command-line Java banking system that supports savings, checking, and loan accounts.
+A simple command-line banking system built with **Java**. This project was created as a college project to practice Object-Oriented Programming and understand how different types of bank accounts can have different rules while sharing common functionality.
 
-The project was made to practice core Java concepts in a practical setting. Instead of treating every account the same way, each account type has its own rules. Savings accounts earn monthly interest, checking accounts apply a small transaction fee, and loan accounts accept repayments.
+The system supports **Savings, Checking, and Loan accounts** along with basic banking operations, account restrictions, validation, and local CSV data storage.
 
-The project is intentionally kept compact. It focuses on the banking logic rather than adding a GUI, external services, or a large application structure.
+## 📌 Problem Statement
 
-## What the system can do
+Basic ATM programs usually handle only simple operations like deposits, withdrawals, and balance checking. This project goes a step further by modelling different account types with their own rules.
 
-### Account management
+For example:
 
-* Create Savings, Checking, and Loan accounts
-* Find an account using its account number
-* List all accounts
-* Lock or unlock an account
+- Savings accounts earn monthly interest.
+- Checking accounts have a transaction fee.
+- Loan accounts accept repayments but do not allow withdrawals.
+- Accounts can be locked or unlocked.
+- Money can be transferred between accounts.
 
-### Transactions
+The project is kept small and easy to understand so that the focus remains on Java and OOP concepts.
 
-* Deposit money
-* Withdraw money
-* Transfer money between accounts
-* Repay a loan
-* Apply a simple monthly update
+## ✨ Features
 
-### Validation
+- Create Savings, Checking, and Loan accounts
+- Automatically generate account numbers
+- Deposit money
+- Withdraw money
+- Transfer money between accounts
+- Repay loans
+- Apply monthly account updates
+- Lock and unlock accounts
+- View one account or list all accounts
+- Save and load account data using CSV files
+- Handle invalid operations using exceptions
+- Run basic validation tests
+
+## 💳 Account Types
+
+| Account | Main Rule |
+|---|---|
+| **Savings** | Earns 0.5% monthly interest |
+| **Checking** | Charges a ₹10 transaction fee |
+| **Loan** | Accepts repayments and adds 1% monthly interest |
+
+Loan accounts do not allow withdrawals.
+
+## 🧠 OOP Concepts Used
+
+The project mainly focuses on:
+
+- **Abstraction** – `BankAccount` is an abstract base class.
+- **Inheritance** – Savings, Checking, and Loan accounts extend `BankAccount`.
+- **Polymorphism** – Different account types implement their own behaviour.
+- **Encapsulation** – Account data such as balance and lock status is managed inside the account class.
+- **Exception Handling** – `BankException` is used for banking-related errors.
+
+```text
+                 BankAccount
+                     │
+          ┌──────────┼──────────┐
+          │          │          │
+          ▼          ▼          ▼
+      Savings     Checking     Loan
+      Account     Account     Account
+📂 Project Structure
+digital-bank/
+│
+├── src/
+│   └── bank/
+│       ├── Bank.java
+│       ├── BankAccount.java
+│       ├── BankApp.java
+│       ├── BankException.java
+│       ├── CheckingAccount.java
+│       ├── LoanAccount.java
+│       ├── SavingsAccount.java
+│       └── ValidationTest.java
+│
+├── data/
+│   ├── bank-data.csv
+│   └── demo-bank.csv
+│
+├── out/
+│   ├── classes/
+│   └── test-classes/
+│
+├── run.sh
+├── test.sh
+├── statement.md
+└── README.md
+📄 Main Files
+Bank.java – Manages accounts, transactions, transfers, monthly updates, and CSV data.
+BankAccount.java – Abstract parent class containing common account functionality.
+SavingsAccount.java – Handles savings account behaviour and monthly interest.
+CheckingAccount.java – Handles checking accounts and transaction fees.
+LoanAccount.java – Handles loan repayments, restrictions, and loan interest.
+BankException.java – Custom exception for banking errors.
+BankApp.java – Main command-line application and user menu.
+ValidationTest.java – Tests important invalid operations.
+run.sh – Compiles and runs the application.
+test.sh – Compiles and runs the validation tests.
+statement.md – Contains the problem statement, scope, target users, and project requirements.
+💰 Banking Operations
+
+The application provides a simple menu:
+
+================================
+           DIGITAL BANK
+================================
+1. Create Account
+2. Deposit Money
+3. Withdraw Money
+4. Transfer Money
+5. Repay Loan
+6. Apply Monthly Update
+7. View Account
+8. List Accounts
+9. Lock / Unlock Account
+0. Exit
+🔐 Validation & Error Handling
 
 The system checks common problems such as:
 
-* Insufficient funds
-* Missing accounts
-* Transfers to the same account
-* Operations on locked accounts
-* Invalid or non positive amounts
+Insufficient funds
+Missing accounts
+Invalid transaction amounts
+Transfers to the same account
+Operations on locked accounts
+Withdrawals from loan accounts
 
-A custom `BankException` is used for the main banking errors so failures are handled cleanly instead of letting the program crash.
+A custom BankException is used to handle banking-related errors cleanly.
 
-## Java concepts used
+💾 Data Storage
 
-The project mainly uses:
+Account information is stored locally using CSV files.
 
-* Inheritance and polymorphism
-* Encapsulation
-* HashMap for account lookup
-* Custom exception handling
-* Exception handling
-* File I/O
-* Collections
-* `switch` expressions
-* Basic synchronized transfer handling
-
-The account classes share the common `BankAccount` base class, while the child classes override behavior where the rules are different.
-
-## Project structure
-
-```text
-src/bank/
-├── BankApp.java
-├── BankAccount.java
-├── SavingsAccount.java
-├── CheckingAccount.java
-├── LoanAccount.java
-├── Bank.java
-├── BankException.java
-└── ValidationTest.java
-
-run.sh
-test.sh
-README.md
-statement.md
-data/
-out/
-```
-
-### Class overview
-
-`BankApp.java` handles the menu and command line input.
-
-`BankAccount.java` contains the common account fields and operations.
-
-`SavingsAccount.java` adds monthly interest.
-
-`CheckingAccount.java` applies a transaction fee.
-
-`LoanAccount.java` handles loan balance and repayment.
-
-`Bank.java` stores accounts in a `HashMap` and handles deposits, withdrawals, transfers, persistence, and monthly updates.
-
-`BankException.java` contains the custom exception used for banking errors.
-
-`ValidationTest.java` checks a few important invalid operations.
-
-## Running the project
-
-The project is designed to run directly from a terminal.
-
-You need Java JDK 17 or later.
-
-### Normal run
-
-```bash
-./run.sh
-```
-
-If the script does not have execute permission, use:
-
-```bash
-bash run.sh
-```
-
-### Demo run
-
-A small demo is included to quickly check the main operations:
-
-```bash
-./run.sh demo
-```
-
-or:
-
-```bash
-bash run.sh demo
-```
-
-### Run validation tests
-
-```bash
-./test.sh
-```
-
-or:
-
-```bash
-bash test.sh
-```
-
-## Data
-
-Account records are stored locally in:
-
-```text
 data/bank-data.csv
-```
+data/demo-bank.csv
 
-The program creates the file when needed. A separate test data file is used during validation tests.
+The stored information includes:
 
-## A few rules used in the project
+accountNumber,type,holderName,balance,locked
 
-Savings accounts receive a simple monthly interest update of `0.5%`.
+This allows account data to be saved and loaded when the application starts.
 
-Checking accounts use a transaction fee of `₹10` for supported transactions.
+🧪 Testing
 
-Loan repayments reduce the outstanding loan balance and cannot make it negative.
+The project includes basic validation tests for:
 
-A locked account cannot be used for normal deposit, withdrawal, or transfer operations.
+Insufficient funds
+Self-transfer
+Locked account operations
 
-These values are kept simple on purpose so the behavior is easy to understand and test.
+Run the tests using:
 
-## Keeping the project manageable
+./test.sh
+🎯 Project Scope
 
-This is a learning project, not a production banking system. The main focus is the account hierarchy, different account behavior, safe transfers, exceptions, and basic persistence.
+This project is mainly intended for students learning:
 
-Features such as real authentication, a GUI, online payments, encryption, and a full banking database are outside the scope of this version.
+Java
+Object-Oriented Programming
+Inheritance and Polymorphism
+Exception Handling
+Collections
+File Handling
+CSV Storage
+Basic Testing
+Shell Scripting
 
-## Author
+It is an educational project and is not intended to be a real banking application. It does not include real authentication, online payments, encryption, or a production database.
 
-Yash Rao Patankar  
-Integrated M.Tech in Computational and Data Science  
-VIT Bhopal University
+📚 What I Learned
+
+Through this project, I got practical experience with designing Java classes, connecting them through inheritance, handling different behaviours using polymorphism, working with collections and files, creating custom exceptions, and writing simple shell scripts and validation tests.
+
+🔮 Future Improvements
+
+Some possible improvements are:
+
+Add a GUI
+Add user authentication
+Add transaction history
+Add a database
+Add JUnit tests
+Improve input validation
+Use BigDecimal for financial calculations
+Add more account types
+Add transaction receipts
